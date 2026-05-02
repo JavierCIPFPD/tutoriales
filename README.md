@@ -1,6 +1,6 @@
 # Tutoriales Web
 
-Este repositorio agrupa proyectos estaticos de una sola pagina, pensados como material didactico para aprender estructura web basica, Git y publicacion en GitHub Pages.
+Este repositorio agrupa proyectos web estaticos de una sola pagina, pensados como material didactico para aprender estructura web basica, Git y publicacion en GitHub Pages.
 
 ## Contenido
 
