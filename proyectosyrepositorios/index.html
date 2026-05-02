@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tutorial paso a paso para gestionar proyectos con Git y sincronizarlos con GitHub usando Visual Studio Code.">
+  <meta name="theme-color" content="#eef6f8">
+  <title>Git y GitHub con VS Code</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="page-shell">
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <header class="hero" id="inicio">
+    <nav class="topbar">
+      <a class="brand" href="#inicio">Git &amp; GitHub con VS Code</a>
+      <button class="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro" aria-pressed="false">
+        <span class="theme-toggle__label">Modo oscuro</span>
+      </button>
+    </nav>
+
+    <div class="hero__content">
+      <p class="eyebrow">Guia practica · control de versiones</p>
+      <h1>Gestiona y publica tu proyecto con Git y GitHub.</h1>
+      <p class="hero__lead">
+        Aprende que es <span class="term" tabindex="0" data-tooltip="Sistema de control de versiones distribuido que registra cada cambio en los archivos de un proyecto.">Git</span>,
+        como funciona, y como sincronizar tu proyecto
+        <span class="term" tabindex="0" data-tooltip="Carpeta con todos los archivos y el historial de versiones registrado por Git.">miprimerproyectoweb</span>
+        con <span class="term" tabindex="0" data-tooltip="Plataforma en la nube que aloja repositorios Git y facilita la colaboracion entre desarrolladores.">GitHub</span>
+        directamente desde <span class="term" tabindex="0" data-tooltip="Editor de codigo de Microsoft con integracion nativa de Git que permite gestionar versiones sin abrir la terminal.">Visual Studio Code</span>.
+      </p>
+      <div class="hero__actions">
+        <a class="button button--primary" href="#que-es-git">Empezar</a>
+        <a class="button button--ghost" href="#tutorial">Ir al tutorial</a>
+        <a class="button button--ghost" href="#github-pages">GitHub Pages</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════ QUE ES GIT ═══════════════ -->
+    <section class="section section--floating" id="que-es-git">
+      <div class="section__heading">
+        <p class="section__eyebrow">Control de versiones</p>
+        <h2>¿Que es Git y para que sirve?</h2>
+        <p>
+          <span class="term" tabindex="0" data-tooltip="Herramienta de linea de comandos creada por Linus Torvalds en 2005 para gestionar el historial de cambios de un proyecto.">Git</span>
+          es un sistema de
+          <span class="term" tabindex="0" data-tooltip="Practica de registrar cada modificacion de los archivos para poder recuperar versiones anteriores o trabajar en equipo sin pisarse.">control de versiones</span>
+          distribuido. Guarda una fotografia de tu proyecto cada vez que tu lo decides, permitiendo deshacer errores, colaborar sin conflictos y mantener un historial legible de todo lo que ha cambiado.
+        </p>
+      </div>
+
+      <div class="grid grid--three">
+        <article class="card card--tall">
+          <h3>Que hace Git</h3>
+          <p>
+            Registra cada cambio en tus archivos como un
+            <span class="term" tabindex="0" data-tooltip="Instantanea guardada del estado completo del proyecto en un momento concreto, identificada por un codigo unico (hash).">commit</span>.
+            Puedes ver quien cambio que, cuando y por que, y recuperar cualquier version anterior con un solo comando.
+          </p>
+          <p>
+            A diferencia de copiar carpetas a mano, Git guarda solo las diferencias entre versiones, lo que ahorra espacio y aclara el historial.
+          </p>
+        </article>
+
+        <article class="card card--tall">
+          <h3>Las tres zonas de Git</h3>
+          <p>
+            Git separa el trabajo en tres areas que conviene entender antes de empezar:
+          </p>
+          <ul class="feature-list">
+            <li>
+              <strong><span class="term" tabindex="0" data-tooltip="Carpeta del proyecto donde editas los archivos normalmente.">Directorio de trabajo</span></strong>:
+              donde ves y editas tus archivos.
+            </li>
+            <li>
+              <strong><span class="term" tabindex="0" data-tooltip="Zona intermedia donde marcas exactamente que cambios quieres incluir en el proximo commit. Tambien llamado index.">Area de preparacion (stage)</span></strong>:
+              donde seleccionas que cambios guardar.
+            </li>
+            <li>
+              <strong><span class="term" tabindex="0" data-tooltip="Base de datos oculta dentro del proyecto donde Git almacena el historial completo de commits.">Repositorio local</span></strong>:
+              donde quedan guardados los commits permanentemente.
+            </li>
+          </ul>
+        </article>
+
+        <article class="card card--tall">
+          <h3>Git vs GitHub</h3>
+          <p>
+            <span class="term" tabindex="0" data-tooltip="Programa que se instala en tu ordenador y gestiona el historial de tu proyecto localmente.">Git</span>
+            es la herramienta que se instala en tu ordenador.
+            <span class="term" tabindex="0" data-tooltip="Servicio web de Microsoft que hospeda repositorios Git online, permite colaborar y publicar proyectos.">GitHub</span>
+            es un servicio en la nube donde puedes subir ese repositorio para compartirlo, colaborar o hacer una copia de seguridad.
+          </p>
+          <p>
+            Git puede usarse sin GitHub, pero GitHub necesita Git para funcionar.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════ INFOGRAFIA FLUJO ═══════════════ -->
+    <section class="section parallax-band" id="flujo">
+      <div class="section__heading narrow">
+        <p class="section__eyebrow">Como funciona Git</p>
+        <h2>El flujo de trabajo</h2>
+        <p>Cada cambio recorre estas etapas antes de llegar al servidor remoto.</p>
+      </div>
+
+      <div class="infographic">
+        <div class="flow-area flow-area--work">
+          <span class="flow-area__label">Directorio<br>de trabajo</span>
+          <span class="flow-area__icon">📁</span>
+          <p class="flow-area__hint">Editas archivos aqui</p>
+        </div>
+
+        <div class="flow-arrow">
+          <span class="flow-arrow__cmd"><code>git add</code></span>
+          <span class="flow-arrow__line" aria-hidden="true"></span>
+          <span class="flow-arrow__tip" aria-hidden="true"></span>
+        </div>
+
+        <div class="flow-area flow-area--stage">
+          <span class="flow-area__label">Area de<br>preparacion</span>
+          <span class="flow-area__icon">📋</span>
+          <p class="flow-area__hint">Seleccionas que guardar</p>
+        </div>
+
+        <div class="flow-arrow">
+          <span class="flow-arrow__cmd"><code>git commit</code></span>
+          <span class="flow-arrow__line" aria-hidden="true"></span>
+          <span class="flow-arrow__tip" aria-hidden="true"></span>
+        </div>
+
+        <div class="flow-area flow-area--local">
+          <span class="flow-area__label">Repositorio<br>local</span>
+          <span class="flow-area__icon">💾</span>
+          <p class="flow-area__hint">Historial en tu ordenador</p>
+        </div>
+
+        <div class="flow-arrow flow-arrow--remote">
+          <span class="flow-arrow__cmd flow-arrow__cmd--double">
+            <code>git push</code>
+            <span class="flow-arrow__return"><code>git pull</code></span>
+          </span>
+          <span class="flow-arrow__line" aria-hidden="true"></span>
+          <span class="flow-arrow__tip" aria-hidden="true"></span>
+        </div>
+
+        <div class="flow-area flow-area--remote">
+          <span class="flow-area__label">GitHub<br>(remoto)</span>
+          <span class="flow-area__icon">☁️</span>
+          <p class="flow-area__hint">Copia en la nube</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ COMANDOS BASICOS ═══════════════ -->
+    <section class="section section--floating" id="comandos">
+      <div class="section__heading">
+        <p class="section__eyebrow">Referencia rapida</p>
+        <h2>Comandos basicos de Git</h2>
+        <p>
+          Estos son los comandos del dia a dia. Con ellos cubres el
+          <span class="term" tabindex="0" data-tooltip="Ciclo habitual de trabajo: modificar archivos, preparar los cambios y guardarlos en el historial.">flujo completo</span>
+          de un proyecto sencillo.
+        </p>
+      </div>
+
+      <div class="cmd-grid">
+
+        <article class="cmd-card cmd-card--init">
+          <h3 class="cmd-card__title"><span class="cmd-badge">INICIO</span></h3>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git init</span></code></pre>
+            <p>Crea un repositorio Git vacio en la carpeta actual. Solo se ejecuta una vez al comenzar el proyecto.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git clone</span> <span class="tok-str">&lt;url&gt;</span></code></pre>
+            <p>Descarga un repositorio remoto completo, con todo su historial.</p>
+          </div>
+        </article>
+
+        <article class="cmd-card cmd-card--status">
+          <h3 class="cmd-card__title"><span class="cmd-badge">ESTADO</span></h3>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git status</span></code></pre>
+            <p>Muestra que archivos han cambiado, cuales estan preparados y cuales no.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git log</span> <span class="tok-op">--oneline</span></code></pre>
+            <p>Lista el historial de commits de forma compacta, un commit por linea.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git diff</span></code></pre>
+            <p>Muestra exactamente que lineas han cambiado en los archivos modificados.</p>
+          </div>
+        </article>
+
+        <article class="cmd-card cmd-card--changes">
+          <h3 class="cmd-card__title"><span class="cmd-badge">CAMBIOS</span></h3>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git add</span> <span class="tok-str">.</span></code></pre>
+            <p>Mueve todos los cambios al area de preparacion. Usa un nombre de archivo en lugar del punto para seleccionar solo uno.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git commit</span> <span class="tok-op">-m</span> <span class="tok-str">"mensaje"</span></code></pre>
+            <p>Guarda los cambios preparados como un nuevo punto en el historial. El mensaje debe describir que cambio y por que.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git restore</span> <span class="tok-str">&lt;archivo&gt;</span></code></pre>
+            <p>Descarta los cambios no guardados de un archivo y lo vuelve al estado del ultimo commit.</p>
+          </div>
+        </article>
+
+        <article class="cmd-card cmd-card--branches">
+          <h3 class="cmd-card__title"><span class="cmd-badge">RAMAS</span></h3>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git branch</span></code></pre>
+            <p>Lista todas las <span class="term" tabindex="0" data-tooltip="Linea de desarrollo independiente que permite trabajar en una funcionalidad sin afectar al codigo principal.">ramas</span> del repositorio y marca la activa.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git checkout</span> <span class="tok-op">-b</span> <span class="tok-str">&lt;nombre&gt;</span></code></pre>
+            <p>Crea una nueva rama y cambia a ella en un solo paso.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git merge</span> <span class="tok-str">&lt;rama&gt;</span></code></pre>
+            <p>Integra los commits de otra rama en la rama activa.</p>
+          </div>
+        </article>
+
+        <article class="cmd-card cmd-card--remote">
+          <h3 class="cmd-card__title"><span class="cmd-badge">REMOTO</span></h3>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git remote add</span> <span class="tok-str">origin &lt;url&gt;</span></code></pre>
+            <p>Registra la URL del repositorio remoto con el nombre <em>origin</em>, el alias estandar para el servidor principal.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git push</span> <span class="tok-op">-u</span> <span class="tok-str">origin main</span></code></pre>
+            <p>Sube los commits locales al servidor. El flag <code>-u</code> establece el seguimiento automatico para futuros push y pull.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git pull</span></code></pre>
+            <p>Descarga los cambios del servidor y los integra automaticamente en la rama local.</p>
+          </div>
+        </article>
+
+        <article class="cmd-card cmd-card--config">
+          <h3 class="cmd-card__title"><span class="cmd-badge">CONFIGURACION</span></h3>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git config</span> <span class="tok-op">--global</span> user.name <span class="tok-str">"Tu Nombre"</span></code></pre>
+            <p>Establece el nombre que aparecera en todos tus commits. Se guarda una sola vez en el sistema.</p>
+          </div>
+          <div class="cmd-item">
+            <pre><code><span class="tok-fn">git config</span> <span class="tok-op">--global</span> user.email <span class="tok-str">"correo@ejemplo.com"</span></code></pre>
+            <p>Registra el email vinculado a tus commits, que GitHub usa para asociarlos a tu cuenta.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════ TUTORIAL PASO A PASO ═══════════════ -->
+    <section class="section parallax-band" id="tutorial">
+      <div class="section__heading narrow">
+        <p class="section__eyebrow">Tutorial con VS Code</p>
+        <h2>De cero a GitHub: paso a paso</h2>
+        <p>
+          Usamos el proyecto
+          <span class="term" tabindex="0" data-tooltip="Proyecto de ejemplo creado anteriormente con la estructura minima de una web profesional.">miprimerproyectoweb</span>
+          como referencia. Cada paso puede hacerse desde la
+          <span class="term" tabindex="0" data-tooltip="Panel lateral de VS Code (icono con tres circulos y una bifurcacion) que permite hacer commit, push y pull sin escribir comandos.">interfaz grafica de VS Code</span>
+          o desde el
+          <span class="term" tabindex="0" data-tooltip="Ventana de texto integrada en VS Code (Ver > Terminal) donde puedes escribir comandos directamente.">terminal integrado</span>.
+        </p>
+      </div>
+
+      <div class="step-list">
+
+        <article class="step-card">
+          <span class="step-card__num">01</span>
+          <div class="step-card__body">
+            <h3>Instalar Git en tu ordenador</h3>
+            <p>
+              Descarga Git desde
+              <a class="link" href="https://git-scm.com" target="_blank" rel="noopener noreferrer">git-scm.com</a>
+              e instalalo con las opciones por defecto. En Windows el instalador incluye
+              <span class="term" tabindex="0" data-tooltip="Terminal de Unix para Windows que instala Git for Windows, util para practicar comandos de Git.">Git Bash</span>.
+            </p>
+            <p>Para comprobar que la instalacion fue bien, abre el terminal y ejecuta:</p>
+            <pre><code><span class="tok-fn">git</span> <span class="tok-op">--version</span></code></pre>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">02</span>
+          <div class="step-card__body">
+            <h3>Configurar tu identidad</h3>
+            <p>
+              Git asocia cada commit a un nombre y un email. Estos datos son solo informativos, no afectan al acceso. Ejecuta una sola vez:
+            </p>
+            <pre><code><span class="tok-fn">git config</span> <span class="tok-op">--global</span> user.name <span class="tok-str">"Ana Garcia"</span>
+<span class="tok-fn">git config</span> <span class="tok-op">--global</span> user.email <span class="tok-str">"ana@ejemplo.com"</span></code></pre>
+            <p>
+              El flag
+              <span class="term" tabindex="0" data-tooltip="Opcion que aplica la configuracion a todos los proyectos del ordenador, no solo al actual."><code>--global</code></span>
+              aplica esta configuracion a todos tus proyectos.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">03</span>
+          <div class="step-card__body">
+            <h3>Abrir el proyecto en VS Code</h3>
+            <p>
+              En VS Code usa <kbd>Archivo → Abrir carpeta…</kbd> y selecciona
+              <code>miprimerproyectoweb</code>.
+              Asegurate de que la carpeta raiz del proyecto es la que abre VS Code, no una carpeta padre.
+            </p>
+            <p>
+              El icono de
+              <span class="term" tabindex="0" data-tooltip="Panel de VS Code accesible con el icono de bifurcacion en la barra lateral izquierda (o Ctrl+Shift+G) que muestra cambios, permite hacer stage, commit, push y pull.">Control de codigo fuente</span>
+              (tercero en la barra lateral izquierda) mostrara <em>No hay un repositorio Git</em> hasta que lo inicializemos.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">04</span>
+          <div class="step-card__body">
+            <h3>Inicializar el repositorio local</h3>
+            <p>Tienes dos formas equivalentes de hacerlo:</p>
+            <p><strong>Opcion A — Desde VS Code:</strong> en el panel de Control de codigo fuente, pulsa el boton <em>Inicializar repositorio</em>.</p>
+            <p><strong>Opcion B — Desde el terminal:</strong></p>
+            <pre><code><span class="tok-fn">git init</span></code></pre>
+            <p>
+              Git crea una carpeta oculta
+              <span class="term" tabindex="0" data-tooltip="Carpeta oculta .git que Git crea en la raiz del proyecto para almacenar todo el historial y la configuracion del repositorio."><code>.git</code></span>
+              con toda la base de datos del repositorio. No la toques ni la borres.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">05</span>
+          <div class="step-card__body">
+            <h3>Crear el archivo .gitignore</h3>
+            <p>
+              Antes del primer commit conviene indicarle a Git que archivos ignorar: carpetas de dependencias, archivos de configuracion local o secretos. Crea un archivo llamado
+              <span class="term" tabindex="0" data-tooltip="Archivo de texto en la raiz del proyecto donde se listan patrones de archivos y carpetas que Git debe ignorar completamente."><code>.gitignore</code></span>
+              en la raiz con el contenido que necesites. Ejemplo minimo:
+            </p>
+            <pre><code><span class="tok-str">node_modules/</span>
+<span class="tok-str">.DS_Store</span>
+<span class="tok-str">*.log</span></code></pre>
+            <p>GitHub ofrece plantillas de .gitignore para cada lenguaje al crear un repositorio.</p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">06</span>
+          <div class="step-card__body">
+            <h3>Hacer el primer commit</h3>
+            <p>
+              Ahora hay que llevar los archivos al
+              <span class="term" tabindex="0" data-tooltip="Zona intermedia de Git donde se marcan los cambios que formaran parte del proximo commit.">area de preparacion</span>
+              y luego confirmarlos.
+            </p>
+            <p><strong>Opcion A — Desde VS Code:</strong></p>
+            <ol class="feature-list">
+              <li>En el panel de Control de codigo fuente, verás todos los archivos bajo <em>Cambios</em>.</li>
+              <li>Pulsa el icono <strong>+</strong> junto a <em>Cambios</em> para preparar todos.</li>
+              <li>Escribe un mensaje en el cuadro de texto, por ejemplo: <em>feat: estructura inicial del proyecto</em>.</li>
+              <li>Pulsa <kbd>✓ Confirmar</kbd> (o <kbd>Ctrl+Enter</kbd>).</li>
+            </ol>
+            <p><strong>Opcion B — Desde el terminal:</strong></p>
+            <pre><code><span class="tok-fn">git add</span> <span class="tok-str">.</span>
+<span class="tok-fn">git commit</span> <span class="tok-op">-m</span> <span class="tok-str">"feat: estructura inicial del proyecto"</span></code></pre>
+            <p>
+              Un buen mensaje de commit explica el <em>que</em> y el <em>por que</em>, no el <em>como</em>. La convencion
+              <span class="term" tabindex="0" data-tooltip="Estandar para escribir mensajes de commit con un prefijo (feat, fix, docs, style...) que describe el tipo de cambio realizado.">Conventional Commits</span>
+              añade un prefijo como <code>feat:</code>, <code>fix:</code> o <code>docs:</code>.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">07</span>
+          <div class="step-card__body">
+            <h3>Crear el repositorio en GitHub</h3>
+            <ol class="feature-list">
+              <li>Accede a <a class="link" href="https://github.com" target="_blank" rel="noopener noreferrer">github.com</a> e inicia sesion.</li>
+              <li>Pulsa el boton verde <strong>New</strong> o el icono <strong>+</strong> en la esquina superior derecha.</li>
+              <li>Escribe el nombre del repositorio: <code>miprimerproyectoweb</code>.</li>
+              <li>Elige <strong>Public</strong> o <strong>Private</strong> segun tu preferencia (lo explicamos en la seccion siguiente).</li>
+              <li><strong>No</strong> marques ninguna opcion de inicializacion (README, .gitignore, licencia) ya que el proyecto ya existe en local.</li>
+              <li>Pulsa <strong>Create repository</strong>.</li>
+            </ol>
+            <p>GitHub mostrara una pantalla con instrucciones; copia la <span class="term" tabindex="0" data-tooltip="Direccion web unica del repositorio en GitHub que Git usa para enviar y recibir datos.">URL del repositorio</span>.</p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">08</span>
+          <div class="step-card__body">
+            <h3>Conectar el repositorio local con GitHub</h3>
+            <p>
+              Hay que decirle a Git donde esta el servidor remoto. En VS Code abre el terminal integrado con
+              <kbd>Ctrl + `</kbd> y ejecuta (sustituye la URL por la tuya):
+            </p>
+            <pre><code><span class="tok-fn">git remote add</span> <span class="tok-str">origin</span> https://github.com/tuusuario/miprimerproyectoweb.git
+<span class="tok-fn">git branch</span> <span class="tok-op">-M</span> <span class="tok-str">main</span></code></pre>
+            <p>
+              <code><span class="tok-str">origin</span></code> es el
+              <span class="term" tabindex="0" data-tooltip="Nombre corto que Git usa para referirse a la URL del repositorio remoto. Por convencion se llama origin.">alias del remoto</span>.
+              El segundo comando renombra la rama principal a <code>main</code>, el nombre estandar en GitHub.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">09</span>
+          <div class="step-card__body">
+            <h3>Subir el proyecto a GitHub (primer push)</h3>
+            <p><strong>Opcion A — Desde VS Code:</strong></p>
+            <ol class="feature-list">
+              <li>En el panel de Control de codigo fuente, despliega el menu <strong>···</strong>.</li>
+              <li>Selecciona <strong>Push</strong>. VS Code pedira autenticacion si es la primera vez.</li>
+            </ol>
+            <p><strong>Opcion B — Desde el terminal:</strong></p>
+            <pre><code><span class="tok-fn">git push</span> <span class="tok-op">-u</span> <span class="tok-str">origin main</span></code></pre>
+            <p>
+              El flag
+              <span class="term" tabindex="0" data-tooltip="Opcion de git push que establece la rama remota como referencia predeterminada. Despues ya solo necesitas escribir 'git push'."><code>-u</code> (upstream)</span>
+              guarda la configuracion para que los siguientes pushes solo necesiten <code>git push</code>.
+            </p>
+            <p>Actualiza la pagina de GitHub: veras todos tus archivos ya publicados.</p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">10</span>
+          <div class="step-card__body">
+            <h3>El flujo diario de trabajo</h3>
+            <p>A partir de este punto, el ciclo habitual es sencillo:</p>
+            <div class="daily-flow">
+              <div class="daily-flow__step">
+                <span class="daily-flow__icon">✏️</span>
+                <span>Edita archivos en VS Code</span>
+              </div>
+              <span class="daily-flow__sep" aria-hidden="true">→</span>
+              <div class="daily-flow__step">
+                <span class="daily-flow__icon">➕</span>
+                <span>Stage los cambios (<code>+</code> en el panel o <code>git add</code>)</span>
+              </div>
+              <span class="daily-flow__sep" aria-hidden="true">→</span>
+              <div class="daily-flow__step">
+                <span class="daily-flow__icon">💬</span>
+                <span>Escribe un mensaje y haz commit</span>
+              </div>
+              <span class="daily-flow__sep" aria-hidden="true">→</span>
+              <div class="daily-flow__step">
+                <span class="daily-flow__icon">☁️</span>
+                <span>Push para subir a GitHub</span>
+              </div>
+            </div>
+            <p>
+              Si trabajas en varios dispositivos o en equipo, haz siempre
+              <span class="term" tabindex="0" data-tooltip="Comando que descarga los commits del servidor remoto y los integra automaticamente en tu rama local."><code>git pull</code></span>
+              antes de empezar a editar para sincronizar los cambios del servidor.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════ REPOSITORIOS PUBLICOS Y PRIVADOS ═══════════════ -->
+    <section class="section section--floating" id="repositorios">
+      <div class="section__heading">
+        <p class="section__eyebrow">Organizar en GitHub</p>
+        <h2>Repositorios publicos y privados</h2>
+        <p>
+          GitHub ofrece dos tipos de visibilidad. La eleccion depende de a quien quieres dar acceso y de si deseas que el proyecto sea visible en tu perfil.
+        </p>
+      </div>
+
+      <div class="grid grid--two">
+        <article class="card card--tall repo-card repo-card--public">
+          <h3>
+            <span class="repo-card__badge repo-card__badge--public">Publico</span>
+            Repositorio publico
+          </h3>
+          <p>
+            Cualquier persona puede ver el codigo, clonar el repositorio y leer su historial. Solo tu (y los colaboradores que invites) podeis hacer push.
+          </p>
+          <p><strong>Usa un repositorio publico cuando:</strong></p>
+          <ul class="feature-list">
+            <li>Quieras mostrar el proyecto en tu
+              <span class="term" tabindex="0" data-tooltip="Pagina de GitHub con tu nombre de usuario donde aparecen tus repositorios publicos y tu actividad.">perfil de GitHub</span>
+              como parte de tu
+              <span class="term" tabindex="0" data-tooltip="Coleccion de proyectos que muestra tus habilidades a empleadores o clientes.">portfolio</span>.
+            </li>
+            <li>Sea un proyecto de
+              <span class="term" tabindex="0" data-tooltip="Software cuyo codigo fuente es accesible y puede ser estudiado, modificado y redistribuido libremente.">codigo abierto</span>
+              y quieras que otros contribuyan.
+            </li>
+            <li>Sea un ejercicio, practica o proyecto educativo sin datos sensibles.</li>
+            <li>Quieras usar GitHub Pages de forma gratuita (requiere repositorio publico en la cuenta gratuita).</li>
+          </ul>
+        </article>
+
+        <article class="card card--tall repo-card repo-card--private">
+          <h3>
+            <span class="repo-card__badge repo-card__badge--private">Privado</span>
+            Repositorio privado
+          </h3>
+          <p>
+            Solo tu y las personas que invites expresamente pueden ver el repositorio. No aparece en tu perfil publico.
+          </p>
+          <p><strong>Usa un repositorio privado cuando:</strong></p>
+          <ul class="feature-list">
+            <li>El proyecto contenga
+              <span class="term" tabindex="0" data-tooltip="Claves de API, contrasenas, tokens u otra informacion que no debe ser visible al publico.">datos sensibles o credenciales</span>.
+            </li>
+            <li>Sea un proyecto de cliente o trabajo con codigo propietario.</li>
+            <li>Este en fase inicial y no quieras publicarlo todavia.</li>
+            <li>Colabores con un equipo cerrado sin querer exposicion externa.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="tip-card">
+        <h3>Consejo: organiza tus repositorios con claridad</h3>
+        <ul class="feature-list">
+          <li>Usa nombres descriptivos y en minusculas con guiones: <code>mi-proyecto-web</code>, no <code>prj1_v2_final</code>.</li>
+          <li>Añade siempre un
+            <span class="term" tabindex="0" data-tooltip="Archivo README.md en la raiz del repositorio que explica el proposito del proyecto, como instalarlo y como usarlo.">README.md</span>
+            con una descripcion breve, instrucciones de instalacion y uso.
+          </li>
+          <li>Añade una
+            <span class="term" tabindex="0" data-tooltip="Archivo LICENSE que define bajo que condiciones otras personas pueden usar, modificar y distribuir tu codigo.">licencia</span>
+            en proyectos publicos (MIT es la mas permisiva y habitual).
+          </li>
+          <li>Usa
+            <span class="term" tabindex="0" data-tooltip="Etiquetas de texto que GitHub permite asignar a repositorios para categorizar temas y facilitar su busqueda.">topics</span>
+            (pestana About del repositorio) para etiquetar el lenguaje y el area del proyecto.
+          </li>
+          <li>Agrupa proyectos relacionados bajo una
+            <span class="term" tabindex="0" data-tooltip="Cuenta colectiva en GitHub que permite agrupar repositorios relacionados bajo un mismo nombre, util para equipos o proyectos de empresa.">organizacion</span>
+            si trabajas con mas personas.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════ GITHUB PAGES ═══════════════ -->
+    <section class="section parallax-band" id="github-pages">
+      <div class="section__heading narrow">
+        <p class="section__eyebrow">Publicacion gratuita</p>
+        <h2>Publica tu proyecto en GitHub Pages</h2>
+        <p>
+          <span class="term" tabindex="0" data-tooltip="Servicio gratuito de GitHub que convierte el contenido de un repositorio en una web accesible publicamente con una URL del tipo usuario.github.io.">GitHub Pages</span>
+          sirve los archivos estaticos de tu repositorio como una web publica sin necesidad de pagar un hosting. Perfecto para proyectos HTML, CSS y JavaScript como
+          <code>miprimerproyectoweb</code>.
+        </p>
+      </div>
+
+      <div class="step-list step-list--compact">
+
+        <article class="step-card">
+          <span class="step-card__num">01</span>
+          <div class="step-card__body">
+            <h3>Accede a Settings del repositorio</h3>
+            <p>
+              En GitHub, abre el repositorio <code>miprimerproyectoweb</code> y pulsa la pestana
+              <strong>Settings</strong> (la ultima del menu superior, con icono de engranaje).
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">02</span>
+          <div class="step-card__body">
+            <h3>Abre la seccion Pages</h3>
+            <p>
+              En el menu lateral izquierdo de Settings, busca la seccion
+              <strong>Code and automation</strong> y pulsa <strong>Pages</strong>.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">03</span>
+          <div class="step-card__body">
+            <h3>Configura la fuente de publicacion</h3>
+            <p>En <em>Build and deployment → Source</em> selecciona <strong>Deploy from a branch</strong>.</p>
+            <p>
+              En <em>Branch</em>, elige <strong>main</strong> y en el selector de carpeta deja
+              <strong>/ (root)</strong>.
+            </p>
+            <p>Pulsa <strong>Save</strong>.</p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">04</span>
+          <div class="step-card__body">
+            <h3>Espera el despliegue</h3>
+            <p>
+              GitHub tarda entre 30 segundos y 2 minutos en compilar y publicar la web. Recarga la pagina de Settings → Pages hasta que aparezca el mensaje
+              <em>"Your site is live at…"</em> con la URL definitiva.
+            </p>
+            <p>La URL tendra siempre la forma:</p>
+            <pre><code>https://<span class="tok-str">tuusuario</span>.github.io/<span class="tok-str">miprimerproyectoweb</span>/</code></pre>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">05</span>
+          <div class="step-card__body">
+            <h3>Actualizaciones automaticas</h3>
+            <p>
+              A partir de ahora, cada vez que hagas
+              <span class="term" tabindex="0" data-tooltip="Operacion que sube los commits locales al repositorio remoto en GitHub."><code>git push</code></span>
+              a la rama <code>main</code>, GitHub Pages volvera a desplegar automaticamente la web con los nuevos cambios.
+            </p>
+            <p>
+              No necesitas repetir la configuracion de Pages: el
+              <span class="term" tabindex="0" data-tooltip="Automatizacion que GitHub activa cuando se sube codigo nuevo para compilar y publicar el sitio.">despliegue continuo</span>
+              ya esta activado.
+            </p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-card__num">06</span>
+          <div class="step-card__body">
+            <h3>Dominio personalizado (opcional)</h3>
+            <p>
+              Si tienes un
+              <span class="term" tabindex="0" data-tooltip="Nombre web comprado a un registrador, como mipagina.com, que puedes vincular a tu sitio en lugar de usar la URL de github.io.">dominio propio</span>,
+              puedes vincularlo en la misma seccion Pages añadiendo un archivo <code>CNAME</code> en la raiz del repositorio con el nombre de tu dominio y configurando los registros
+              <span class="term" tabindex="0" data-tooltip="Entrada DNS que apunta un dominio a una direccion IP; GitHub indica las IPs de Pages en su documentacion.">A</span>
+              o
+              <span class="term" tabindex="0" data-tooltip="Entrada DNS que apunta un subdominio (como www) a otro nombre de dominio, en este caso a la URL de github.io.">CNAME</span>
+              en tu proveedor de DNS.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

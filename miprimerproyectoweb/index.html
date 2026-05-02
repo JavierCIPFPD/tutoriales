@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía visual de la estructura mínima recomendada para un proyecto web sencillo y profesional.">
+  <meta name="theme-color" content="#f6f1e8">
+  <title>Estructura Web Minima Profesional</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero parallax-panel" id="inicio">
+      <nav class="topbar">
+        <a class="brand" href="#inicio">Proyecto Web Minimo</a>
+        <button class="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro" aria-pressed="false">
+          <span class="theme-toggle__label">Modo oscuro</span>
+        </button>
+      </nav>
+
+      <div class="hero__content">
+        <p class="eyebrow">Guia practica en una sola pagina</p>
+        <h1>La estructura minima para publicar una web sencilla con aspecto profesional.</h1>
+        <p class="hero__lead">
+          Esta pagina explica que carpetas y archivos conviene incluir en un proyecto basico,
+          por que existen y que lineas concretas marcan la diferencia entre una prueba rapida y una web lista para subir.
+        </p>
+        <p class="hero__hint">
+          Pasa el cursor o usa la tecla tab sobre cada <span class="term" tabindex="0" data-tooltip="Palabra especializada del desarrollo web que aqui se explica con una definicion breve.">termino tecnico</span> para ver su explicacion.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#estructura">Ver estructura</a>
+          <a class="button button--ghost" href="#lineas-clave">Ver lineas clave</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section--floating" id="estructura">
+        <div class="section__heading">
+          <p class="section__eyebrow">Base del proyecto</p>
+          <h2>Carpetas y archivos minimos recomendados</h2>
+          <p>
+            Con esta estructura puedes mantener orden, separar responsabilidades y subir el proyecto a un <span class="term" tabindex="0" data-tooltip="Servicio que publica archivos web sin ejecutar codigo del servidor; entrega HTML, CSS, JavaScript e imagenes.">hosting estatico</span> sin depender de herramientas complejas.
+          </p>
+        </div>
+
+        <div class="grid grid--two">
+          <article class="card">
+            <h3>Arbol sugerido</h3>
+            <pre class="file-tree"><code>miprimerproyectoweb/
+|-- index.html
+|-- assets/
+|   |-- css/
+|   |   `-- style.css
+|   |-- js/
+|   |   `-- main.js
+|   `-- img/
+|       `-- favicon.svg</code></pre>
+          </article>
+
+          <article class="card">
+            <h3>Que aporta cada parte</h3>
+            <ul class="feature-list">
+              <li><strong><span class="term" tabindex="0" data-tooltip="Archivo principal que se carga primero en el navegador.">index.html</span></strong> contiene la estructura y el contenido visible.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Carpeta para hojas de estilo, encargadas del aspecto visual.">assets/css</span></strong> guarda el diseño y ayuda a mantener limpio el HTML.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Carpeta para scripts que añaden interaccion y comportamiento.">assets/js</span></strong> concentra la logica interactiva.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Carpeta para imagenes, iconos y recursos graficos.">assets/img</span></strong> separa los recursos visuales.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Pequeno icono que identifica la web en la pestana del navegador.">favicon</span></strong> mejora la presentacion del sitio.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section parallax-band" id="archivos">
+        <div class="section__heading narrow">
+          <p class="section__eyebrow">Funcion de cada archivo</p>
+          <h2>Que debe contener un proyecto pequeno</h2>
+        </div>
+
+        <div class="grid grid--three">
+          <article class="card card--tall">
+            <h3><span class="term" tabindex="0" data-tooltip="Lenguaje de marcado que organiza textos, enlaces, imagenes y secciones de una pagina.">HTML</span></h3>
+            <p>
+              El archivo <span class="term" tabindex="0" data-tooltip="Documento principal de entrada del sitio.">index.html</span> define el contenido, el orden de lectura y los enlaces a estilos, scripts e iconos.
+            </p>
+            <p>
+              Es la pieza imprescindible: si existe este archivo y las <span class="term" tabindex="0" data-tooltip="Direcciones internas que indican donde se encuentra cada archivo del proyecto.">rutas</span> son correctas, el <span class="term" tabindex="0" data-tooltip="Programa o servicio que entrega la pagina web al navegador del visitante.">hosting</span> suele poder servir la web sin configuracion extra.
+            </p>
+          </article>
+
+          <article class="card card--tall">
+            <h3><span class="term" tabindex="0" data-tooltip="Lenguaje de estilos que controla colores, tipografia, espaciados y composicion.">CSS</span></h3>
+            <p>
+              El archivo <span class="term" tabindex="0" data-tooltip="Hoja de estilos principal del proyecto.">style.css</span> se ocupa del aspecto visual, la adaptacion a movil y efectos como el <span class="term" tabindex="0" data-tooltip="Efecto visual en el que distintas capas parecen moverse a diferente velocidad al hacer scroll.">parallax</span>.
+            </p>
+            <p>
+              Separar estilos del HTML hace que el proyecto sea mas mantenible y profesional.
+            </p>
+          </article>
+
+          <article class="card card--tall">
+            <h3><span class="term" tabindex="0" data-tooltip="Lenguaje de programacion que aporta comportamiento en el navegador.">JavaScript</span></h3>
+            <p>
+              El archivo <span class="term" tabindex="0" data-tooltip="Script principal que escucha eventos y modifica la interfaz.">main.js</span> permite cambiar entre tema claro y oscuro y activar pequenas mejoras de experiencia.
+            </p>
+            <p>
+              Si el proyecto no necesita <span class="term" tabindex="0" data-tooltip="Respuesta de la interfaz ante acciones del usuario, como pulsar un boton.">interaccion</span>, puede ser muy pequeno, pero sigue siendo util dejarlo preparado.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--floating" id="lineas-clave">
+        <div class="section__heading">
+          <p class="section__eyebrow">Detalles que marcan la diferencia</p>
+          <h2>Lineas concretas que conviene entender</h2>
+          <p>
+            Estas lineas parecen pequenas, pero mejoran <span class="term" tabindex="0" data-tooltip="Capacidad de la web para funcionar bien en distintos navegadores y dispositivos.">compatibilidad</span>, <span class="term" tabindex="0" data-tooltip="Facilidad con la que cualquier persona, tambien con ayudas tecnicas, puede usar la pagina.">accesibilidad</span>, <span class="term" tabindex="0" data-tooltip="Visibilidad del contenido en buscadores gracias a una estructura y descripciones claras.">posicionamiento</span> y experiencia de uso.
+          </p>
+        </div>
+
+        <div class="code-stack">
+          <article class="code-card">
+            <h3>Cabecera del HTML</h3>
+            <pre><code>&lt;!<span class="tok-kw">doctype</span> html&gt;
+&lt;<span class="tok-tag">html</span> <span class="tok-attr">lang</span>=<span class="tok-str">"es"</span>&gt;
+&lt;<span class="tok-tag">meta</span> <span class="tok-attr">charset</span>=<span class="tok-str">"utf-8"</span>&gt;
+&lt;<span class="tok-tag">meta</span> <span class="tok-attr">name</span>=<span class="tok-str">"viewport"</span> <span class="tok-attr">content</span>=<span class="tok-str">"width=device-width, initial-scale=1"</span>&gt;
+&lt;<span class="tok-tag">meta</span> <span class="tok-attr">name</span>=<span class="tok-str">"description"</span> <span class="tok-attr">content</span>=<span class="tok-str">"Resumen claro del sitio"</span>&gt;
+&lt;<span class="tok-tag">title</span>&gt;Nombre de la pagina&lt;/<span class="tok-tag">title</span>&gt;
+&lt;<span class="tok-tag">link</span> <span class="tok-attr">rel</span>=<span class="tok-str">"icon"</span> <span class="tok-attr">href</span>=<span class="tok-str">"assets/img/favicon.svg"</span> <span class="tok-attr">type</span>=<span class="tok-str">"image/svg+xml"</span>&gt;</code></pre>
+            <ul class="explanation-list">
+              <li><span class="term" tabindex="0" data-tooltip="Instruccion que indica al navegador la version estandar de HTML usada.">doctype</span>: activa el modo estandar del navegador.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Atributo que indica el idioma principal del contenido.">lang="es"</span>: ayuda a <span class="term" tabindex="0" data-tooltip="Programas que leen en voz alta el contenido para personas con dificultades visuales.">lectores de pantalla</span> y <span class="term" tabindex="0" data-tooltip="Servicios como Google o Bing que indexan paginas para mostrarlas en resultados.">buscadores</span>.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Conjunto de caracteres que permite mostrar tildes y simbolos correctamente.">charset="utf-8"</span>: evita problemas con caracteres especiales.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Metaetiqueta que ajusta la anchura visual al tamano real del dispositivo.">meta viewport</span>: hace que la web sea <span class="term" tabindex="0" data-tooltip="Diseñada para adaptarse a distintos anchos de pantalla.">responsive</span> en movil.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Resumen breve que puede usar un buscador al mostrar la pagina.">meta description</span>: mejora la presentacion del sitio en <span class="term" tabindex="0" data-tooltip="Listado que muestra un buscador cuando alguien hace una consulta.">resultados de busqueda</span>.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Texto que aparece en la pestana del navegador y en marcadores.">title</span>: identifica claramente la pagina.</li>
+            </ul>
+          </article>
+
+          <article class="code-card">
+            <h3>Conexion de estilos y scripts</h3>
+            <pre><code>&lt;<span class="tok-tag">link</span> <span class="tok-attr">rel</span>=<span class="tok-str">"stylesheet"</span> <span class="tok-attr">href</span>=<span class="tok-str">"assets/css/style.css"</span>&gt;
+...
+&lt;<span class="tok-tag">script</span> <span class="tok-attr">src</span>=<span class="tok-str">"assets/js/main.js"</span> <span class="tok-attr">defer</span>&gt;&lt;/<span class="tok-tag">script</span>&gt;</code></pre>
+            <ul class="explanation-list">
+              <li><span class="term" tabindex="0" data-tooltip="Relacion que indica que el archivo enlazado es una hoja de estilos.">rel="stylesheet"</span>: carga el CSS del proyecto.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Ruta relativa desde el archivo actual hasta otro recurso del proyecto.">href</span>: apunta al archivo correcto dentro de la estructura.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Atributo que retrasa la ejecucion del script hasta que el HTML esta listo.">defer</span>: evita bloquear la carga visual de la pagina.</li>
+            </ul>
+          </article>
+
+          <article class="code-card">
+            <h3>Claves del CSS</h3>
+            <pre><code><span class="tok-sel">:root</span> {
+  <span class="tok-var">--bg</span>: <span class="tok-lit">#eef6f8</span>;
+  <span class="tok-var">--text</span>: <span class="tok-lit">#12202d</span>;
+}
+
+<span class="tok-kw">@media</span> (max-width: <span class="tok-num">720px</span>) {
+  <span class="tok-sel">.grid--three</span> {
+    <span class="tok-prop">grid-template-columns</span>: <span class="tok-num">1fr</span>;
+  }
+}</code></pre>
+            <ul class="explanation-list">
+              <li><span class="term" tabindex="0" data-tooltip="Variables reutilizables declaradas en CSS para mantener coherencia visual.">variables CSS</span>: facilitan cambiar tema y colores.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Regla que aplica estilos distintos segun el tamano de pantalla.">@media</span>: adapta la composicion al movil.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Unidad que ocupa una fraccion del espacio disponible en una cuadrícula.">1fr</span>: hace que una columna ocupe todo el ancho disponible.</li>
+            </ul>
+          </article>
+
+          <article class="code-card">
+            <h3>Claves del JavaScript</h3>
+            <pre><code><span class="tok-kw">const</span> root = document.documentElement;
+<span class="tok-kw">const</span> savedTheme = localStorage.<span class="tok-fn">getItem</span>(<span class="tok-str">'preferred-theme'</span>);
+
+themeToggle?.<span class="tok-fn">addEventListener</span>(<span class="tok-str">'click'</span>, () =&gt; {
+  <span class="tok-kw">const</span> nextTheme = root.dataset.theme <span class="tok-op">===</span> <span class="tok-str">'dark'</span> ? <span class="tok-str">'light'</span> : <span class="tok-str">'dark'</span>;
+  <span class="tok-fn">setTheme</span>(nextTheme);
+});</code></pre>
+            <ul class="explanation-list">
+              <li><span class="term" tabindex="0" data-tooltip="Objeto que representa el elemento html completo del documento.">document.documentElement</span>: permite cambiar atributos globales del sitio.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Almacen del navegador que guarda datos sencillos incluso despues de cerrar la pagina.">localStorage</span>: recuerda el tema elegido por la persona usuaria.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Sistema de atributos personalizados accesible desde JavaScript mediante dataset.">dataset.theme</span>: guarda el tema activo en el HTML para que el CSS lo detecte.</li>
+              <li><span class="term" tabindex="0" data-tooltip="Metodo que ejecuta una accion cuando sucede un evento, como un clic.">addEventListener</span>: conecta el boton con el cambio visual.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--checklist" id="publicacion">
+        <div class="section__heading narrow">
+          <p class="section__eyebrow">Antes de subir la web</p>
+          <h2>Lista minima de comprobacion</h2>
+        </div>
+
+        <div class="checklist">
+          <article class="check-item">
+            <span class="check-item__index">01</span>
+            <p>Comprueba que <span class="term" tabindex="0" data-tooltip="Pagina principal que muchos servidores abren automaticamente al visitar la carpeta.">index.html</span> este en la raiz del proyecto.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">02</span>
+            <p>Verifica que las rutas a <span class="term" tabindex="0" data-tooltip="Direccion de un recurso dentro del propio proyecto.">assets</span> funcionen tambien despues de subir los archivos.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">03</span>
+            <p>Reduce archivos innecesarios y deja nombres claros, cortos y consistentes.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">04</span>
+            <p>Prueba la pagina en movil, en escritorio y con tema claro y oscuro.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
