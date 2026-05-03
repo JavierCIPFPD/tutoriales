@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ejemplo minimo para depurar: suma de dos numeros con el bug de concatenacion.">
+  <meta name="theme-color" content="#f6f1e8">
+  <title>Ejemplo: Suma con error</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero" style="min-height: auto; padding: 2rem clamp(1.1rem, 2vw, 2rem);">
+      <nav class="topbar">
+        <a class="brand" href="index.html">Volver al tutorial</a>
+        <button class="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro" aria-pressed="false">
+          <span class="theme-toggle__label">Modo oscuro</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section section--floating" style="padding: 3rem clamp(1.1rem, 2vw, 2rem);">
+        <div class="section__heading">
+          <p class="section__eyebrow">Ejercicio de depuracion</p>
+          <h2>Suma dos numeros sin distracciones</h2>
+          <p>
+            Abre Chrome DevTools con <strong>F12</strong>, ve a Sources, pon un breakpoint en la linea de la suma y observa por que `2 + 3` produce `23` en lugar de `5`.
+          </p>
+        </div>
+
+        <article class="code-card" style="max-width: 600px; margin: 2rem auto;">
+          <h3>El codigo a depurar</h3>
+          <pre><code><span class="tok-kw">function</span> <span class="tok-fn">sumar</span>() {
+  <span class="tok-kw">const</span> a = document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#input-a'</span>).value;
+  <span class="tok-kw">const</span> b = document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#input-b'</span>).value;
+  <span class="tok-kw">const</span> resultado = a <span class="tok-op">+</span> b;
+  document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#output'</span>).textContent = resultado;
+}</code></pre>
+        </article>
+
+        <article class="demo-card" style="max-width: 600px; margin: 2rem auto;">
+          <div class="demo-panel">
+            <label class="demo-field">
+              <span>Numero 1</span>
+              <input id="input-a" class="demo-input" type="number" inputmode="numeric" value="2">
+            </label>
+
+            <label class="demo-field">
+              <span>Numero 2</span>
+              <input id="input-b" class="demo-input" type="number" inputmode="numeric" value="3">
+            </label>
+
+            <div class="demo-actions">
+              <button class="button button--primary" type="button" id="btn-sumar">Sumar</button>
+            </div>
+
+            <div class="demo-result" aria-live="polite">
+              <p class="demo-result__lead">Resultado: <strong id="output">---</strong></p>
+            </div>
+
+            <div class="demo-inspector" style="grid-template-columns: repeat(2, minmax(0, 1fr));" aria-live="polite">
+              <article class="demo-inspector__card">
+                <span class="demo-inspector__label">Valor de a</span>
+                <strong id="valor-a">---</strong>
+                <span id="tipo-a">---</span>
+              </article>
+              <article class="demo-inspector__card">
+                <span class="demo-inspector__label">Valor de b</span>
+                <strong id="valor-b">---</strong>
+                <span id="tipo-b">---</span>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <div class="callout callout--contrast" style="max-width: 600px; margin: 2rem auto;">
+          <p>
+            <strong>Pista clave:</strong> coloca el breakpoint en la linea `const resultado = a + b;` y observa en el inspector que `a` y `b` son strings, no numbers. Eso hace que `+` concatene en lugar de sumar.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.querySelector('.theme-toggle');
+    const themeLabel = document.querySelector('.theme-toggle__label');
+    const inputA = document.querySelector('#input-a');
+    const inputB = document.querySelector('#input-b');
+    const output = document.querySelector('#output');
+    const valorA = document.querySelector('#valor-a');
+    const tipoA = document.querySelector('#tipo-a');
+    const valorB = document.querySelector('#valor-b');
+    const tipoB = document.querySelector('#tipo-b');
+    const btnSumar = document.querySelector('#btn-sumar');
+
+    // Tema claro/oscuro
+    const setTheme = (theme) => {
+      const isDark = theme === 'dark';
+      root.dataset.theme = theme;
+      localStorage.setItem('preferred-theme', theme);
+      themeToggle?.setAttribute('aria-pressed', String(isDark));
+
+      if (themeLabel) {
+        themeLabel.textContent = isDark ? 'Modo claro' : 'Modo oscuro';
+      }
+    };
+
+    const savedTheme = localStorage.getItem('preferred-theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    setTheme(savedTheme || systemTheme);
+
+    themeToggle?.addEventListener('click', () => {
+      const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+    });
+
+    // Función con bug: concatena en lugar de sumar
+    function sumar() {
+      const a = document.querySelector('#input-a').value;
+      const b = document.querySelector('#input-b').value;
+      const resultado = a + b;
+
+      document.querySelector('#output').textContent = resultado;
+
+      // Inspector de valores y tipos
+      valorA.textContent = typeof a === 'string' ? `"${a}"` : String(a);
+      tipoA.textContent = typeof a;
+      valorB.textContent = typeof b === 'string' ? `"${b}"` : String(b);
+      tipoB.textContent = typeof b;
+    }
+
+    btnSumar?.addEventListener('click', sumar);
+
+    // Inicializar
+    sumar();
+  </script>
+</body>
+</html>

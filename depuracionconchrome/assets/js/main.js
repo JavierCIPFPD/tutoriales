@@ -15,6 +15,7 @@ const inspectorResultType = document.querySelector('#inspector-result-type');
 const brokenButton = document.querySelector('#demo-broken-button');
 const fixedButton = document.querySelector('#demo-fixed-button');
 const consoleButton = document.querySelector('#demo-console-button');
+const openButton = document.querySelector('#demo-open-button');
 const resetButton = document.querySelector('#demo-reset-button');
 const consoleHelpText = document.querySelector('#demo-console-help-text');
 
@@ -136,6 +137,9 @@ const guideConsole = () => {
 brokenButton?.addEventListener('click', runBrokenSum);
 fixedButton?.addEventListener('click', runFixedSum);
 consoleButton?.addEventListener('click', guideConsole);
+openButton?.addEventListener('click', () => {
+  window.open('depurar.html', '_blank');
+});
 resetButton?.addEventListener('click', resetDemo);
 
 inputA?.addEventListener('input', runBrokenSum);
