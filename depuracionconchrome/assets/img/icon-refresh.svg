@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="Recargar pagina tras corregir el codigo">
+  <rect width="420" height="280" rx="28" fill="#eff7fa"/>
+  <rect x="24" y="24" width="372" height="232" rx="20" fill="#ffffff" stroke="#c8dbe5"/>
+  <rect x="52" y="66" width="146" height="146" rx="24" fill="#f3f8fb" stroke="#c8dbe5"/>
+  <path d="M126 98 a38 38 0 1 0 30 62" fill="none" stroke="#007c87" stroke-width="10" stroke-linecap="round"/>
+  <path d="M146 88 h26 v26" fill="none" stroke="#007c87" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="226" y="72" width="136" height="132" rx="20" fill="#12202d"/>
+  <text x="248" y="106" font-family="Consolas, monospace" font-size="15" fill="#8be49b">a: 2</text>
+  <text x="248" y="136" font-family="Consolas, monospace" font-size="15" fill="#8be49b">b: 3</text>
+  <text x="248" y="170" font-family="Consolas, monospace" font-size="18" fill="#50d0d8">resultado: 5</text>
+  <text x="56" y="238" font-family="Outfit, Arial, sans-serif" font-size="20" fill="#12202d">Corrige, recarga y repite la prueba</text>
+</svg>

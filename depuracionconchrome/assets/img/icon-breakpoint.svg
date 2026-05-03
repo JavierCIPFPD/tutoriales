@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="Breakpoint en un numero de linea de Chrome DevTools">
+  <rect width="420" height="280" rx="28" fill="#eff7fa"/>
+  <rect x="24" y="24" width="372" height="232" rx="20" fill="#ffffff" stroke="#c8dbe5"/>
+  <rect x="46" y="60" width="46" height="170" rx="14" fill="#f3f8fb" stroke="#c8dbe5"/>
+  <rect x="104" y="60" width="250" height="170" rx="14" fill="#f9fcfd" stroke="#c8dbe5"/>
+  <text x="60" y="96" font-family="Consolas, monospace" font-size="16" fill="#6f8796">8</text>
+  <text x="60" y="126" font-family="Consolas, monospace" font-size="16" fill="#6f8796">9</text>
+  <circle cx="68" cy="152" r="12" fill="#007cff"/>
+  <text x="60" y="158" font-family="Consolas, monospace" font-size="16" fill="#ffffff">10</text>
+  <text x="60" y="186" font-family="Consolas, monospace" font-size="16" fill="#6f8796">11</text>
+  <text x="124" y="98" font-family="Consolas, monospace" font-size="16" fill="#005f8e">const a = inputA.value;</text>
+  <text x="124" y="128" font-family="Consolas, monospace" font-size="16" fill="#005f8e">const b = inputB.value;</text>
+  <rect x="114" y="138" width="220" height="28" rx="10" fill="#e4f0ff"/>
+  <text x="124" y="158" font-family="Consolas, monospace" font-size="16" fill="#9a4d00">const resultado = a + b;</text>
+  <text x="124" y="188" font-family="Consolas, monospace" font-size="16" fill="#005f8e">mostrar(resultado);</text>
+  <path d="M334 152 h32" stroke="#007cff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M356 140 l14 12 l-14 12" fill="none" stroke="#007cff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

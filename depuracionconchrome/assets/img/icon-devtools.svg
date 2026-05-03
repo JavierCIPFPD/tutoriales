@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="Abrir Chrome DevTools">
+  <rect width="420" height="280" rx="28" fill="#eff7fa"/>
+  <rect x="24" y="24" width="372" height="232" rx="20" fill="#ffffff" stroke="#c8dbe5"/>
+  <rect x="24" y="24" width="372" height="34" rx="20" fill="#dcecf1"/>
+  <circle cx="52" cy="41" r="6" fill="#ff6f61"/>
+  <circle cx="72" cy="41" r="6" fill="#ffbf47"/>
+  <circle cx="92" cy="41" r="6" fill="#33c26b"/>
+  <rect x="52" y="86" width="180" height="94" rx="18" fill="#f3f8fb" stroke="#c8dbe5"/>
+  <path d="M120 129 a22 22 0 1 1 0 1" fill="none" stroke="#007c87" stroke-width="10" stroke-linecap="round"/>
+  <path d="M140 108 l22 0 l0 22" fill="none" stroke="#007c87" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="258" y="82" width="110" height="106" rx="16" fill="#12202d"/>
+  <rect x="280" y="102" width="66" height="12" rx="6" fill="#50d0d8"/>
+  <rect x="280" y="126" width="48" height="10" rx="5" fill="#7fc8cf"/>
+  <rect x="280" y="148" width="60" height="10" rx="5" fill="#7fc8cf"/>
+  <path d="M220 196 C260 212, 296 216, 332 206" fill="none" stroke="#007c87" stroke-width="6" stroke-dasharray="8 8"/>
+  <circle cx="335" cy="205" r="8" fill="#007c87"/>
+  <text x="54" y="224" font-family="Outfit, Arial, sans-serif" font-size="20" fill="#12202d">F12 / Inspeccionar</text>
+</svg>

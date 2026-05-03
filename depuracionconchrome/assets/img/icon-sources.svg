@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="Pestana Sources de Chrome DevTools">
+  <rect width="420" height="280" rx="28" fill="#eff7fa"/>
+  <rect x="24" y="24" width="372" height="232" rx="20" fill="#ffffff" stroke="#c8dbe5"/>
+  <rect x="24" y="24" width="372" height="38" rx="20" fill="#12202d"/>
+  <rect x="46" y="74" width="82" height="28" rx="12" fill="#dfecef"/>
+  <rect x="136" y="74" width="92" height="28" rx="12" fill="#007c87"/>
+  <text x="157" y="93" font-family="Outfit, Arial, sans-serif" font-size="16" fill="#f4fdff">Sources</text>
+  <rect x="46" y="118" width="96" height="108" rx="14" fill="#f3f8fb" stroke="#c8dbe5"/>
+  <rect x="158" y="118" width="194" height="108" rx="14" fill="#f9fcfd" stroke="#c8dbe5"/>
+  <rect x="60" y="136" width="56" height="10" rx="5" fill="#7ba3b5"/>
+  <rect x="60" y="158" width="42" height="10" rx="5" fill="#7ba3b5"/>
+  <rect x="60" y="180" width="66" height="10" rx="5" fill="#7ba3b5"/>
+  <text x="172" y="144" font-family="Consolas, monospace" font-size="14" fill="#005f8e">function sumar() {</text>
+  <text x="172" y="166" font-family="Consolas, monospace" font-size="14" fill="#9a4d00">  const resultado = a + b;</text>
+  <text x="172" y="188" font-family="Consolas, monospace" font-size="14" fill="#005f8e">}</text>
+  <path d="M206 88 C230 102, 250 112, 270 122" fill="none" stroke="#50d0d8" stroke-width="6" stroke-dasharray="8 8"/>
+  <circle cx="270" cy="122" r="8" fill="#50d0d8"/>
+</svg>

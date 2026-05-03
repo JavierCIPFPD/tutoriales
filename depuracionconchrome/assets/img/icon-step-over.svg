@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="Boton Step over de Chrome DevTools">
+  <rect width="420" height="280" rx="28" fill="#eff7fa"/>
+  <rect x="24" y="24" width="372" height="232" rx="20" fill="#ffffff" stroke="#c8dbe5"/>
+  <rect x="46" y="52" width="328" height="42" rx="16" fill="#12202d"/>
+  <circle cx="84" cy="73" r="18" fill="#50d0d8"/>
+  <path d="M76 73 h16" stroke="#0b1722" stroke-width="6" stroke-linecap="round"/>
+  <path d="M84 65 v16" stroke="#0b1722" stroke-width="6" stroke-linecap="round" opacity="0.18"/>
+  <path d="M110 73 h24" stroke="#50d0d8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M128 61 l16 12 l-16 12" fill="none" stroke="#50d0d8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="158" y="79" font-family="Outfit, Arial, sans-serif" font-size="18" fill="#eff8ff">Step over</text>
+  <rect x="52" y="124" width="316" height="98" rx="16" fill="#f9fcfd" stroke="#c8dbe5"/>
+  <text x="72" y="158" font-family="Consolas, monospace" font-size="16" fill="#005f8e">a = "2"</text>
+  <text x="72" y="184" font-family="Consolas, monospace" font-size="16" fill="#005f8e">b = "3"</text>
+  <text x="72" y="210" font-family="Consolas, monospace" font-size="16" fill="#9a2a77">resultado = "23"</text>
+</svg>

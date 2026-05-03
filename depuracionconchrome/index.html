@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tutorial visual paso a paso para depurar una suma en Chrome DevTools y entender por que conviene usar el depurador antes que console.log.">
+  <meta name="theme-color" content="#f6f1e8">
+  <title>Depurar una suma en Chrome</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero parallax-panel" id="inicio">
+      <nav class="topbar">
+        <a class="brand" href="#inicio">Depuracion con Chrome</a>
+        <button class="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro" aria-pressed="false">
+          <span class="theme-toggle__label">Modo oscuro</span>
+        </button>
+      </nav>
+
+      <div class="hero__content">
+        <p class="eyebrow">Tutorial visual en una sola pagina</p>
+        <h1>Como depurar una suma en Chrome paso a paso sin depender de <span class="term" tabindex="0" data-tooltip="Metodo rapido para imprimir valores en la consola, util para pruebas pequenas pero limitado para seguir el flujo real del codigo.">console.log</span>.</h1>
+        <p class="hero__lead">
+          Aqui tienes una guia simple para abrir DevTools, poner un breakpoint, avanzar linea a linea y comprobar por que una suma no da el resultado esperado.
+        </p>
+        <p class="hero__hint">
+          Pasa el cursor o usa tab sobre cada <span class="term" tabindex="0" data-tooltip="Palabra tecnica explicada con una definicion corta en contexto.">termino tecnico</span> para ver su significado.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#pasos">Ver pasos</a>
+          <a class="button button--ghost" href="#por-que">Por que depurar</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section--floating" id="escenario">
+        <div class="section__heading">
+          <p class="section__eyebrow">Caso de ejemplo</p>
+          <h2>La suma que vamos a investigar</h2>
+          <p>
+            Imagina que esperas obtener <strong>5</strong>, pero el navegador muestra <strong>23</strong>. Eso suele pasar cuando uno de los valores llega como texto y JavaScript concatena en vez de sumar.
+          </p>
+        </div>
+
+        <div class="grid grid--two">
+          <article class="code-card code-card--compact">
+            <h3>Codigo a depurar</h3>
+            <pre><code><span class="tok-kw">function</span> <span class="tok-fn">sumar</span>() {
+  <span class="tok-kw">const</span> a = document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#numero-a'</span>).value;
+  <span class="tok-kw">const</span> b = document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#numero-b'</span>).value;
+  <span class="tok-kw">const</span> resultado = a <span class="tok-op">+</span> b;
+
+  document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#resultado'</span>).textContent = resultado;
+}</code></pre>
+          </article>
+
+          <article class="card">
+            <h3>Que esta pasando</h3>
+            <ul class="feature-list">
+              <li><strong><span class="term" tabindex="0" data-tooltip="Valor devuelto por un input del navegador; normalmente llega como cadena de texto.">.value</span></strong> devuelve texto, aunque el campo parezca numerico.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Punto de parada temporal en el codigo para inspeccionar variables y flujo.">breakpoint</span></strong> permite detener la ejecucion justo antes del error visible.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Inspeccion de variables mientras el programa esta detenido.">inspeccion</span></strong> ayuda a ver el tipo real de `a` y `b`.</li>
+              <li><strong><span class="term" tabindex="0" data-tooltip="Conversión explicita de un texto a numero para operar correctamente.">Number()</span></strong> es la correccion habitual en este ejemplo.</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="demo-card" id="demo">
+          <div class="demo-card__intro">
+            <p class="section__eyebrow">Mini demo interactiva</p>
+            <h3>Reproduce el fallo dentro del tutorial</h3>
+            <p>
+              Escribe dos valores y pulsa primero el boton con error. Veras el mismo problema que luego depuras en Chrome. Despues pulsa el boton corregido para comparar el comportamiento.
+            </p>
+          </div>
+
+          <div class="demo-panel">
+            <label class="demo-field">
+              <span>Primer valor</span>
+              <input id="numero-a" class="demo-input" type="number" inputmode="numeric" value="2">
+            </label>
+
+            <label class="demo-field">
+              <span>Segundo valor</span>
+              <input id="numero-b" class="demo-input" type="number" inputmode="numeric" value="3">
+            </label>
+
+            <div class="demo-actions">
+              <button class="button button--primary" type="button" id="demo-broken-button">Sumar con error</button>
+              <button class="button button--ghost" type="button" id="demo-fixed-button">Sumar corregido</button>
+              <button class="button button--ghost" type="button" id="demo-console-button">Abrir consola</button>
+              <button class="button button--ghost" type="button" id="demo-reset-button">Restablecer</button>
+            </div>
+
+            <div class="demo-console-help" aria-live="polite">
+              <p class="demo-console-help__lead">Boton de apoyo al flujo de depuracion</p>
+              <p id="demo-console-help-text">
+                Una pagina web no puede abrir Chrome DevTools por si sola. Este boton deja una traza preparada en la consola y te recuerda el atajo correcto: <strong>F12</strong> o <strong>Ctrl + Mayus + J</strong>.
+              </p>
+            </div>
+
+            <div class="demo-result" aria-live="polite">
+              <p class="demo-result__lead">Resultado visible en pantalla: <strong id="resultado">23</strong></p>
+              <p id="demo-status">Ahora mismo estas viendo el comportamiento con error: `2 + 3` produce `23` porque ambos valores son texto.</p>
+            </div>
+
+            <div class="demo-inspector" aria-live="polite">
+              <article class="demo-inspector__card">
+                <span class="demo-inspector__label">Valor de a</span>
+                <strong id="inspector-a-value">"2"</strong>
+                <span id="inspector-a-type">string</span>
+              </article>
+              <article class="demo-inspector__card">
+                <span class="demo-inspector__label">Valor de b</span>
+                <strong id="inspector-b-value">"3"</strong>
+                <span id="inspector-b-type">string</span>
+              </article>
+              <article class="demo-inspector__card">
+                <span class="demo-inspector__label">Resultado</span>
+                <strong id="inspector-result-value">"23"</strong>
+                <span id="inspector-result-type">string</span>
+              </article>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section parallax-band" id="por-que">
+        <div class="section__heading narrow">
+          <p class="section__eyebrow">Antes de empezar</p>
+          <h2>Por que depurar y no limitarse a console.log</h2>
+        </div>
+
+        <div class="grid grid--two">
+          <article class="card card--tall">
+            <h3>Lo que si te da el depurador</h3>
+            <ul class="feature-list feature-list--tight">
+              <li>Pausar exactamente en la linea problematica.</li>
+              <li>Ver el valor actual y el tipo de cada variable.</li>
+              <li>Avanzar una linea cada vez para seguir el flujo real.</li>
+              <li>Comprobar cambios sin llenar el codigo de mensajes temporales.</li>
+            </ul>
+          </article>
+
+          <article class="card card--tall">
+            <h3>Limites de console.log</h3>
+            <ul class="feature-list feature-list--tight">
+              <li>Muestra una foto aislada, no el recorrido completo.</li>
+              <li>Obliga a editar el codigo cada vez que quieres mirar algo nuevo.</li>
+              <li>Puede ocultar el problema si el error depende del orden de ejecucion.</li>
+              <li>Acaba dejando ruido en archivos que luego hay que limpiar.</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="callout callout--contrast">
+          <p>
+            <strong>Idea clave:</strong> usa <span class="term" tabindex="0" data-tooltip="Herramienta integrada en el navegador para pausar, inspeccionar y avanzar por el codigo.">DevTools</span> cuando necesites entender el comportamiento del codigo. Usa `console.log` solo como apoyo rapido, no como tecnica principal de diagnostico.
+          </p>
+        </article>
+      </section>
+
+      <section class="section section--floating" id="pasos">
+        <div class="section__heading">
+          <p class="section__eyebrow">Recorrido guiado</p>
+          <h2>Paso a paso para depurar la suma en Chrome</h2>
+          <p>
+            Cada bloque indica que icono o control debes pulsar y que deberias observar en ese punto.
+          </p>
+        </div>
+
+        <div class="step-list">
+          <article class="step-card">
+            <div class="step-card__header">
+              <span class="step-card__index">01</span>
+              <div>
+                <h3>Abre la pagina y lanza DevTools</h3>
+                <p>Pulsa <strong>F12</strong> o haz clic derecho y elige <strong>Inspeccionar</strong>.</p>
+              </div>
+            </div>
+            <div class="step-card__body">
+              <figure class="icon-figure">
+                <img src="assets/img/icon-devtools.svg" alt="Grafico del icono de herramientas de desarrollador de Chrome.">
+                <figcaption>Icono y acceso a las herramientas de desarrollo.</figcaption>
+              </figure>
+              <div>
+                <p>
+                  Veras un panel acoplado al navegador. Si nunca lo has usado, piensa en el como una mesa de diagnostico para inspeccionar HTML, CSS, red y JavaScript.
+                </p>
+                <p class="step-note">Objetivo: tener visible la interfaz de depuracion antes de reproducir el problema.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__header">
+              <span class="step-card__index">02</span>
+              <div>
+                <h3>Entra en la pestaña Sources</h3>
+                <p>Haz clic en <strong>Sources</strong> para ver los archivos JavaScript cargados.</p>
+              </div>
+            </div>
+            <div class="step-card__body">
+              <figure class="icon-figure">
+                <img src="assets/img/icon-sources.svg" alt="Grafico de la pestana Sources de Chrome DevTools.">
+                <figcaption>Pestana desde la que se ponen breakpoints y se avanza por el codigo.</figcaption>
+              </figure>
+              <div>
+                <p>
+                  En el panel izquierdo localiza el archivo donde esta la funcion `sumar()`. Al abrirlo podras trabajar sobre el codigo real que esta ejecutando la pagina.
+                </p>
+                <p class="step-note">Objetivo: ir al punto exacto donde se calcula `resultado = a + b`.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__header">
+              <span class="step-card__index">03</span>
+              <div>
+                <h3>Pon un breakpoint en la linea de la suma</h3>
+                <p>Haz clic en el numero de linea donde aparece `const resultado = a + b;`.</p>
+              </div>
+            </div>
+            <div class="step-card__body">
+              <figure class="icon-figure">
+                <img src="assets/img/icon-breakpoint.svg" alt="Grafico del marcador de breakpoint sobre un numero de linea en Chrome DevTools.">
+                <figcaption>Un punto azul indica que el breakpoint esta activo.</figcaption>
+              </figure>
+              <div>
+                <p>
+                  Ese punto le dice al navegador: <strong>detente aqui antes de ejecutar esta linea</strong>. Asi puedes revisar el estado real de `a` y `b` justo antes de hacer la operacion.
+                </p>
+                <p class="step-note">Objetivo: congelar la ejecucion donde se produce el valor incorrecto.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__header">
+              <span class="step-card__index">04</span>
+              <div>
+                <h3>Reproduce el error</h3>
+                <p>Vuelve a la pagina, escribe `2` y `3`, y pulsa el boton de sumar.</p>
+              </div>
+            </div>
+            <div class="step-card__body">
+              <figure class="icon-figure">
+                <img src="assets/img/icon-resume.svg" alt="Grafico del panel pausado en un breakpoint y control para continuar o reanudar.">
+                <figcaption>Cuando el breakpoint salta, Chrome marca la linea detenida.</figcaption>
+              </figure>
+              <div>
+                <p>
+                  La ejecucion se pausara automaticamente. En la parte derecha podras leer el valor actual de las variables en el bloque <strong>Scope</strong>.
+                </p>
+                <p class="step-note">Observa que `a` y `b` suelen aparecer como cadenas: `"2"` y `"3"`.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__header">
+              <span class="step-card__index">05</span>
+              <div>
+                <h3>Avanza linea a linea con Step over</h3>
+                <p>Pulsa el boton <strong>Step over next function call</strong> para ejecutar solo la linea actual.</p>
+              </div>
+            </div>
+            <div class="step-card__body">
+              <figure class="icon-figure">
+                <img src="assets/img/icon-step-over.svg" alt="Grafico del boton Step over de Chrome DevTools.">
+                <figcaption>Este boton ejecuta la linea actual sin meterte dentro de otras funciones.</figcaption>
+              </figure>
+              <div>
+                <p>
+                  Al avanzar veras que `resultado` pasa a valer `"23"`. Ya no estas suponiendo: lo has comprobado en tiempo real y en el punto exacto del fallo.
+                </p>
+                <p class="step-note">Diagnostico: la operacion esta concatenando texto, no sumando numeros.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__header">
+              <span class="step-card__index">06</span>
+              <div>
+                <h3>Corrige y vuelve a probar</h3>
+                <p>Convierte ambos valores con `Number()` y recarga la pagina para repetir la prueba.</p>
+              </div>
+            </div>
+            <div class="step-card__body">
+              <figure class="icon-figure">
+                <img src="assets/img/icon-refresh.svg" alt="Grafico del icono de recarga del navegador tras corregir el codigo.">
+                <figcaption>Recarga para comprobar que el fix funciona con el mismo recorrido.</figcaption>
+              </figure>
+              <div>
+                <pre><code><span class="tok-kw">const</span> a = <span class="tok-fn">Number</span>(document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#numero-a'</span>).value);
+<span class="tok-kw">const</span> b = <span class="tok-fn">Number</span>(document.<span class="tok-fn">querySelector</span>(<span class="tok-str">'#numero-b'</span>).value);
+<span class="tok-kw">const</span> resultado = a <span class="tok-op">+</span> b;</code></pre>
+                <p class="step-note">Resultado esperado: ahora el depurador mostrara `5` y la interfaz tambien.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--checklist" id="atajos">
+        <div class="section__heading narrow">
+          <p class="section__eyebrow">Resumen rapido</p>
+          <h2>Atajos y comprobaciones utiles</h2>
+        </div>
+
+        <div class="checklist">
+          <article class="check-item">
+            <span class="check-item__index">F12</span>
+            <p>Abre o cierra Chrome DevTools.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">01</span>
+            <p>Pon el breakpoint en la linea donde sospechas que el dato cambia o se calcula mal.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">02</span>
+            <p>Lee valores y tipos en <strong>Scope</strong> antes de asumir que el error esta donde parece.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">03</span>
+            <p>Usa <strong>Step over</strong> para comprobar el efecto exacto de cada linea sin llenar el codigo de trazas.</p>
+          </article>
+          <article class="check-item">
+            <span class="check-item__index">04</span>
+            <p>Despues del arreglo, repite la misma secuencia para validar que el problema desaparecio de verdad.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
